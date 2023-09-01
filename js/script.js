@@ -15,20 +15,39 @@ const displayCategoriesTitle = (categoriesTitle) =>{
         const listTab = document.createElement('a');
         // listTab.classList = "tab";
         listTab.innerHTML = `
-        <button onclick = "showCard('${categoryTitle.category_id}')" class="btn btn-active btn-ghost text-black px-6">${categoryTitle.category}</button></a> 
+        <button onclick = "showCardFetch('${categoryTitle.category_id}')" class="btn btn-active btn-ghost text-black px-6">${categoryTitle.category}</button></a> 
         `
         categoriesTitleContainer.appendChild(listTab);
     });
 }
-
-const showCard = async(id ='1000') =>{
+const showCardFetch = async(id ='1000') =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     const data = await res.json();
-    const categories = data.data;
+    let categories = data.data;
+    // console.log(categories);
+    
     console.log(categories);
+    const sortId = document.getElementById('sort-id');
+    sortId.addEventListener('click', function(){
+        categories.map(category =>{
+            let arr = []
+            for(let i = 0; i <categories.length; i++){
+                arr.push(category.others.views)
+            }
+            arr = arr.sort();
+
+        });
+        console.log(categories)
+
+    })
+    showCardItem(categories);
+    
+}
+const showCardItem = categories => {
     const cardContainer = document.getElementById('card-container');
     cardContainer.classList = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10";
     cardContainer.innerText = " ";
+    // for no data
     if(categories.length === 0){
         cardContainer.classList = "";
         const cardItem = document.createElement('div');
@@ -41,6 +60,8 @@ const showCard = async(id ='1000') =>{
         `
         cardContainer.appendChild(cardItem);
     }
+    // for data
+
     categories.forEach(category =>{
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
@@ -53,18 +74,33 @@ const showCard = async(id ='1000') =>{
                 </div>
                 <div class="flex-1">
                     <h2 class="card-title">${category.title? category.title : "title not availaible"}</h2>
-                    <div>
+                    <div class="flex">
                         <p>${category.authors[0]?.profile_name? category.authors[0].profile_name:"no author found"}</p>
-                        <img src="" alt="" class=" rounded-full">
+                       <span id="author-details"> </span> 
                     </div>
-                    <p><span>${category.others?.views? category.others?.views : "no"} </span>views</p>
+                    <p><span>${category.others?.views? category.others.views : "no"} </span>views</p>
                 </div>
             </div>
         </div>
         `
+        const verifyDetails = document.getElementById('author-details');
+        // console.log(verifyDetails)
+        if(category.authors[0].verified === true){
+            // console.log(category.authors[0]?.profile_name)
+            // const verify = document.createElement('span');
+            verifyDetails.innerHTML = `<img src="./images/verified.png" alt="">
+            `
+            // verifyDetails.appendChild(verify)
+        }
         cardContainer.appendChild(cardItem);
+        // console.log(parseInt(category.others.views))
     })
 }
+
+// sorting in descending 
 categoriesTypeHandler();
-showCard()
+showCardFetch()
+const descendingSort = () =>{
+
+}
 
