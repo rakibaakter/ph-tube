@@ -29,6 +29,18 @@ const showCard = async(id ='1000') =>{
     const cardContainer = document.getElementById('card-container');
     cardContainer.classList = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10";
     cardContainer.innerText = " ";
+    if(categories.length === 0){
+        cardContainer.classList = "";
+        const cardItem = document.createElement('div');
+        cardItem.classList = 'max-h-screen flex justify-center items-canter';
+        cardItem.innerHTML = `
+            <div class="text-center">
+                <img src="./images/Icon.png" alt="" class="mx-auto">
+                <h2 class="font-bold text-3xl mt-10">Oops!! Sorry, There is <br> no content here</h2>
+            </div>
+        `
+        cardContainer.appendChild(cardItem);
+    }
     categories.forEach(category =>{
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
