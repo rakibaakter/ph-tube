@@ -30,7 +30,7 @@ const showCardFetch = async(id ='1000') =>{
     const sortId = document.getElementById('sort-id');
     sortId.addEventListener('click', function(){
         categories.map(category =>{
-            let arr = []
+            const arr = []
             for(let i = 0; i <categories.length; i++){
                 arr.push(category.others.views)
             }
