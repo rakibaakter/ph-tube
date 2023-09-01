@@ -27,7 +27,8 @@ const showCard = async(id ='1000') =>{
     const categories = data.data;
     console.log(categories);
     const cardContainer = document.getElementById('card-container');
-    cardContainer.classList = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10"
+    cardContainer.classList = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10";
+    cardContainer.innerText = " ";
     categories.forEach(category =>{
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
@@ -35,7 +36,7 @@ const showCard = async(id ='1000') =>{
         <figure><img src="${category.thumbnail}" alt=" " /></figure>
         <div class="card-body">
             <div class="flex gap-6">
-                <div class="w-12 h-12 rounded-full">
+                <div class="w-12 rounded-full">
                     <img src="${category.authors[0]?.profile_picture? category.authors[0].profile_picture :"profile unavailaible"}" alt="" class="w-full rounded-full">
                 </div>
                 <div class="flex-1">
