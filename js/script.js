@@ -65,15 +65,21 @@ const showCardItem = categories => {
     // for data
 
     categories.forEach(category =>{
+        let timeInSecondString = category.others?.posted_date;
+        let timeInSecond = parseInt(timeInSecondString);
+        let timeInHours = Math.floor(timeInSecond / 3600);
+        let timeInMinutes = Math.floor((timeInSecond % 3600)/60)
 
+        let time = `${timeInHours}hrs ${timeInMinutes} min ago`
+        // console.log(typeof timeInSecond, timeInSecond)
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
         cardItem.innerHTML = `
         <figure class="max-h-48 relative">
             <img class="w-full" src="${category.thumbnail}" alt=" "/>
             
-            <div class="bg-black text-white absolute right-4 bottom-2 rounded-lg">
-            <p class="px-2 py-1">${category.others?.posted_date}</p>
+            <div class="bg-black text-white absolute right-4 bottom-2 rounded-lg">${category.others?.posted_date? this.innerHTML=`<p class="px-2 py-1">${time}</p>` : this.innerHTML=' '}
+            
             </div>
         </figure>
         <div class="card-body">
