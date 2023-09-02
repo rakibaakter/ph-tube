@@ -65,9 +65,6 @@ const showCardItem = categories => {
     // for data
 
     categories.forEach(category =>{
-        
-        const verify = document.createElement('span');
-        verify.innerHTML = `<img src="./images/verified.png">`
 
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
@@ -98,15 +95,6 @@ const showCardItem = categories => {
             </div>
         </div>
         `
-        // const verifyDetails = document.getElementById('author-details');
-        // // console.log(verifyDetails)
-        // if(category.authors[0].verified === true){
-        //     // console.log(category.authors[0]?.profile_name)
-        //     // const verify = document.createElement('span');
-        //     verifyDetails.innerHTML = `<img src="./images/verified.png" alt="">
-        //     `
-        //     // verifyDetails.appendChild(verify)
-        // }
         cardContainer.appendChild(cardItem);
         // console.log(parseInt(category.others.views))
     })
@@ -117,5 +105,10 @@ categoriesTypeHandler();
 showCardFetch()
 const descendingSort = () =>{
 
+}
+
+// for blog page
+const changeToBlog = () => {
+    window.location.href ="http://127.0.0.1:5500/blog.html";
 }
 
