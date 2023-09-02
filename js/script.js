@@ -25,24 +25,24 @@ const showCardFetch = async(id ='1000') =>{
     const data = await res.json();
     let categories = data.data;
     // console.log(categories);
-    
-    console.log(categories);
+    // sorting
     const sortId = document.getElementById('sort-id');
     sortId.addEventListener('click', function(){
-        categories.map(category =>{
-            //  arr = []
-            // for(let i = 0; i <categories.length; i++){
-            //     arr.push(category.others.views)
-            // }
-            // arr = arr.sort();
-            parseInt(category.others.views);
-
-        });
-        
-        console.log(categories)
-
+        // categories.map(category =>{
+        //     const value = parseInt(category.others.views);
+        //     arr.push(value)
+            
+        // });
+        // const sortCategoryList = arr.sort();
+        // console.log(sortCategoryList)
+        categories = categories.sort(function(a,b){
+            return parseInt(b.others?.views) - parseInt(a.others?.views)
+        })
+        showCardItem(categories)
+        // console.log(categories)
     })
     showCardItem(categories);
+    
     
 }
 const showCardItem = categories => {
@@ -65,12 +65,12 @@ const showCardItem = categories => {
     // for data
 
     categories.forEach(category =>{
-        let timeInSecondString = category.others?.posted_date;
-        let timeInSecond = parseInt(timeInSecondString);
-        let timeInHours = Math.floor(timeInSecond / 3600);
-        let timeInMinutes = Math.floor((timeInSecond % 3600)/60)
-
-        let time = `${timeInHours}hrs ${timeInMinutes} min ago`
+        const timeInSecondString = category.others?.posted_date;
+        const timeInSecond = parseInt(timeInSecondString);
+        const timeInHours = Math.floor(timeInSecond / 3600);
+        const timeInMinutes = Math.floor((timeInSecond % 3600)/60)
+        
+        const time = `${timeInHours}hrs ${timeInMinutes} min ago`
         // console.log(typeof timeInSecond, timeInSecond)
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
@@ -109,9 +109,6 @@ const showCardItem = categories => {
 // sorting in descending 
 categoriesTypeHandler();
 showCardFetch()
-const descendingSort = () =>{
-
-}
 
 // for blog page
 const changeToBlog = () => {
