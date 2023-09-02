@@ -65,35 +65,48 @@ const showCardItem = categories => {
     // for data
 
     categories.forEach(category =>{
+        
+        const verify = document.createElement('span');
+        verify.innerHTML = `<img src="./images/verified.png">`
+
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
         cardItem.innerHTML = `
-        <figure class="max-h-48"><img class="w-full" src="${category.thumbnail}" alt=" " /></figure>
+        <figure class="max-h-48 relative">
+            <img class="w-full" src="${category.thumbnail}" alt=" "/>
+            
+            <div class="bg-black text-white absolute right-4 bottom-2 rounded-lg">
+            <p class="px-2 py-1">${category.others?.posted_date}</p>
+            </div>
+        </figure>
         <div class="card-body">
             <div class="flex gap-6">
                 <div class="w-12 rounded-full">
                     <img src="${category.authors[0]?.profile_picture? category.authors[0].profile_picture :"profile unavailaible"}" alt="" class="w-full rounded-full">
                 </div>
-                <div class="flex-1">
+                <div class="">
                     <h2 class="card-title">${category.title? category.title : "title not availaible"}</h2>
-                    <div class="flex">
-                        <p>${category.authors[0]?.profile_name? category.authors[0].profile_name:"no author found"}</p>
-                       <span id="author-details"> </span> 
+                    <div class="">
+                        <p class="flex">${category.authors[0]?.profile_name? category.authors[0].profile_name:"no author found"}
+                        <span class="mt-1 ml-2">${category.authors[0]?.verified? this.innerHTML = '<img src="./images/verified.png">' : " "}
+                        </span> 
+                        </p>
+                        
                     </div>
                     <p><span>${category.others?.views? category.others.views : "no"} </span>views</p>
                 </div>
             </div>
         </div>
         `
-        const verifyDetails = document.getElementById('author-details');
-        // console.log(verifyDetails)
-        if(category.authors[0].verified === true){
-            // console.log(category.authors[0]?.profile_name)
-            // const verify = document.createElement('span');
-            verifyDetails.innerHTML = `<img src="./images/verified.png" alt="">
-            `
-            // verifyDetails.appendChild(verify)
-        }
+        // const verifyDetails = document.getElementById('author-details');
+        // // console.log(verifyDetails)
+        // if(category.authors[0].verified === true){
+        //     // console.log(category.authors[0]?.profile_name)
+        //     // const verify = document.createElement('span');
+        //     verifyDetails.innerHTML = `<img src="./images/verified.png" alt="">
+        //     `
+        //     // verifyDetails.appendChild(verify)
+        // }
         cardContainer.appendChild(cardItem);
         // console.log(parseInt(category.others.views))
     })
