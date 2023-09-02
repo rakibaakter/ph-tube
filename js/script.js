@@ -30,13 +30,15 @@ const showCardFetch = async(id ='1000') =>{
     const sortId = document.getElementById('sort-id');
     sortId.addEventListener('click', function(){
         categories.map(category =>{
-            const arr = []
-            for(let i = 0; i <categories.length; i++){
-                arr.push(category.others.views)
-            }
-            arr = arr.sort();
+            //  arr = []
+            // for(let i = 0; i <categories.length; i++){
+            //     arr.push(category.others.views)
+            // }
+            // arr = arr.sort();
+            parseInt(category.others.views);
 
         });
+        
         console.log(categories)
 
     })
@@ -66,7 +68,7 @@ const showCardItem = categories => {
         const cardItem = document.createElement('div');
         cardItem.classList = 'card bg-base-100 shadow-xl';
         cardItem.innerHTML = `
-        <figure><img src="${category.thumbnail}" alt=" " /></figure>
+        <figure class="max-h-48"><img class="w-full" src="${category.thumbnail}" alt=" " /></figure>
         <div class="card-body">
             <div class="flex gap-6">
                 <div class="w-12 rounded-full">
