@@ -15,16 +15,23 @@ const displayCategoriesTitle = (categoriesTitle) =>{
         const listTab = document.createElement('a');
         // listTab.classList = "tab";
         listTab.innerHTML = `
-        <button onclick = "showCardFetch('${categoryTitle.category_id}')" class="btn btn-active btn-ghost text-black px-6">${categoryTitle.category}</button></a> 
+        <button onclick = "showCardFetch('${categoryTitle.category_id}')" id="${categoryTitle.category_id}" class="btn btn-active btn-ghost text-black px-6">${categoryTitle.category}</button></a> 
         `
+        console.log(categoryTitle.category_id)
         categoriesTitleContainer.appendChild(listTab);
     });
 }
+
 const showCardFetch = async(id ='1000') =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     const data = await res.json();
     let categories = data.data;
     // console.log(categories);
+    // bg change
+    // const activeBtn = document.getElementById(activeID);
+    // activeBtn.style.backgroundColor = "red";
+    // activeBtn.style.color = 'white';
+    // console.log(activeBtn)
     // sorting
     const sortId = document.getElementById('sort-id');
     sortId.addEventListener('click', function(){
@@ -45,7 +52,7 @@ const showCardFetch = async(id ='1000') =>{
     
     
 }
-const showCardItem = categories => {
+const showCardItem = (categories) => {
     const cardContainer = document.getElementById('card-container');
     cardContainer.classList = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10";
     cardContainer.innerText = " ";
@@ -104,11 +111,17 @@ const showCardItem = categories => {
         cardContainer.appendChild(cardItem);
         // console.log(parseInt(category.others.views))
     })
+    
+    
 }
 
-// sorting in descending 
 categoriesTypeHandler();
 showCardFetch()
+
+// const activeBtn = document.getElementById('active-btn');
+// activeBtn.addEventListener('click', function(){
+//     console.log(activeBtn)
+// })
 
 // for blog page
 const changeToBlog = () => {
