@@ -17,7 +17,7 @@ const displayCategoriesTitle = (categoriesTitle) =>{
         listTab.innerHTML = `
         <button onclick = "showCardFetch('${categoryTitle.category_id}')" id="${categoryTitle.category_id}" class="btn btn-active btn-ghost text-black px-6">${categoryTitle.category}</button></a> 
         `
-        console.log(categoryTitle.category_id)
+        // console.log(categoryTitle.category_id)
         categoriesTitleContainer.appendChild(listTab);
     });
 }
@@ -123,8 +123,5 @@ showCardFetch()
 //     console.log(activeBtn)
 // })
 
-// for blog page
-const changeToBlog = () => {
-    window.location.href ="http://127.0.0.1:5500/blog.html";
-}
+
 
